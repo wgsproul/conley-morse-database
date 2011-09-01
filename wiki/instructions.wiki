@@ -1,0 +1,73 @@
+#summary Installation and Instructions
+
+<h2> Installation Instructions: </h2>
+
+<p> To install chomp-rutgers and conley-morse-database: </p>
+
+<p> (1) Install Boost and SVN if you don't already have them.</p>
+
+<p> (2) Change to a directory you've created to install in. (For example, cd ~/work/ on my system) The installation will produce subfolders chomp-rutgers and conley-morse-database and all relevant files will be contained therein.
+
+<p> (3) Type: svn checkout http://chomp-rutgers.googlecode.com/svn/ chomp-rutgers </p>
+
+<p> (4) Type: svn checkout http://conley-morse-database.googlecode.com/svn/trunk/ conley-morse-database </p>
+
+<p> (5) Type: cd chomp-rutgers </p>
+
+<p> (6)	Type: make </p>
+
+<p> (7)	Type: cd ../conley-morse-database </p>
+
+<p> (8) Type: make </p>
+
+<h2> conley-morse-database Instructions </h2>
+
+<h3> Single Machine Instructions </h3>
+
+<p> To get started, you'll want to know the theory, so I suggest looking at <a href="http://www.pawelpilarczyk.com/preprint/2009data.pdf"><em>Databases for the Global Dynamics of Multiparameter Systems</em></a>. On one machine, one should want to not do an entire database computation, but rather begin testing on "single parameter boxes" (which would be jobs of an entire database computation). This can be accomplished by running the program "SingleCMG". To get started on this, try the following: </p>
+
+<p> (1) cd conley-morse-database </p>
+<p> (2) make clean </p>
+<p> (3) make SingleCMG </p>
+<p> (4) ./SingleCMG 20 20 # the numbers say which parameter box to compute on -- see source for details </p>
+
+<p> This will produce several .png files and a Graphviz file. Currently, Conley Index information is only printed to the standard (screen) output. The distribution comes with this preconfigured to calculate for the Leslie map (see the Databases paper) at a certain choice of parameter values. If one edits the file conley-morse-database/test/SingleCMG.cpp, she (or he) can change the map, the choice of phase space, and the choice of parameter values. The program can then be recompiled and run again. </p>
+
+<h3> Cluster Instructions </h3>
+
+<p> Once one can successfully run SingleCMG and is confident in execution times and parameter/phase space selections, one can run the main program ./Conley_Morse_Database. This program is intended to be run on a cluster. It is configured by editing
+<pre>
+   ./include/program/Configuration.h 
+</pre>
+and then recompiling by typing 
+<pre>
+   make
+</pre> 
+in the install root.
+</p>
+
+<p> Then the user should edit
+<pre>
+    ./script.sh
+</pre>
+which looks like
+<pre>
+#!/bin/bash
+#PBS -l nodes=15:ppn=8
+
+cd $PBS_O_WORKDIR
+mpiexec  ./Conley_Morse_Database
+</pre>
+and indicate how many nodes and processors per node one requires. The job can then be submitted to the cluster with 
+<pre>
+  qsub script.sh
+</pre>
+and intermittently checked on with
+<pre>
+  qstat
+</pre>
+or stopped with
+<pre>
+  qdel ####
+</pre>
+where #### indicates the job number revealed by qstat. </p> 
