@@ -10,15 +10,17 @@
 
 <p> (3) Type: svn checkout http://chomp-rutgers.googlecode.com/svn/ chomp-rutgers </p>
 
-<p> (4) Type: svn checkout http://conley-morse-database.googlecode.com/svn/trunk/ conley-morse-database </p>
+<p> (4) Type: svn checkout http://cluster-delegator.googlecode.com/svn/trunk/ cluster-delegator </p>
 
-<p> (5) Type: cd chomp-rutgers </p>
+<p> (5) Type: svn checkout http://conley-morse-database.googlecode.com/svn/trunk/ conley-morse-database </p>
 
-<p> (6)	Type: make </p>
+<p> (6) Type: cd chomp-rutgers </p>
 
-<p> (7)	Type: cd ../conley-morse-database </p>
+<p> (7)	Type: make </p>
 
-<p> (8) Type: make </p>
+<p> (8)	Type: cd ../conley-morse-database </p>
+
+<p> (9) Type: make </p>
 
 <h2> conley-morse-database Instructions </h2>
 
@@ -35,7 +37,12 @@
 
 <h3> Cluster Instructions </h3>
 
-<p> Once one can successfully run SingleCMG and is confident in execution times and parameter/phase space selections, one can run the main program ./Conley_Morse_Database. This program is intended to be run on a cluster. It is configured by editing
+<p> Once one can successfully run SingleCMG and is confident in execution times and parameter/phase space selections, one can run the main program ./Conley_Morse_Database. This program is expected to be run on a cluster, but it can also be run on a single machine by using the command 
+<pre>
+mpiexec -np 3 ./Conley_Morse_Database    #here 3 is the number of processes to launch
+</pre>
+
+In both cases, the program is configured by editing
 <pre>
    ./include/program/Configuration.h 
 </pre>
@@ -46,7 +53,7 @@ and then recompiling by typing
 in the install root.
 </p>
 
-<p> Then the user should edit
+<p> To start a cluster computation, the user should edit
 <pre>
     ./script.sh
 </pre>
