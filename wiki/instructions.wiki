@@ -6,9 +6,9 @@
 
 <p> (1) Install Boost and SVN if you don't already have them.</p>
 
-<p> (2) Change to a directory you've created to install in. (For example, cd ~/work/ on my system) The installation will produce subfolders chomp-rutgers and conley-morse-database and all relevant files will be contained therein.
+<p> (2) Install open-mpi (or it's ilk). Alternatively, if you don't intend on using the full cluster-based database software, you may omit this step but later must alter makefiles to use "g++" instead of the open-mpi compiler wrapper "mpicxx" </p>
 
-<p> (3) Type: svn checkout http://chomp-rutgers.googlecode.com/svn/ chomp-rutgers </p>
+<p> (3) Change to a directory you've created to install in. (For example, cd ~/work/ on my system) The installation will produce subfolders chomp-rutgers and conley-morse-database and all relevant files will be contained therein.
 
 <p> (4) Type: svn checkout http://cluster-delegator.googlecode.com/svn/trunk/ cluster-delegator </p>
 
