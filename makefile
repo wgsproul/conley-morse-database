@@ -5,8 +5,8 @@
 #
 CHECKIFMAPISGOOD := yes
 #
-COMPUTE_MORSE_SETS := yes
-COMPUTE_CONTINUATION := yes
+COMPUTE_MORSE_SETS := no
+COMPUTE_CONTINUATION := no
 COMPUTE_CONLEY_INDEX := yes
 DRAW_IMAGES := yes
 #
@@ -159,17 +159,9 @@ SELKOVCMG := ./build/test/SelkovCMG.o
 SelkovCMG: $(SELKOVCMG)
 	$(CC) $(LDFLAGS) $(SELKOVCMG) -o $@ $(LDLIBS)
 
-ATLASCMG := ./build/test/AtlasCMG.o
-AtlasCMG: $(ATLASCMG)
-	$(CC) $(LDFLAGS) $(ATLASCMG) -o $@ $(LDLIBS)
-
 SUBMAPTEST := ./build/test/SubdividedMapTest.o
 SubdividedMapTest: $(SUBMAPTEST)
 	$(CC) $(LDFLAGS) $(SUBMAPTEST) -o $@ $(LDLIBS)
-
-ODECMG := ./build/test/odeCMG.o
-odeCMG: $(ODECMG)
-	$(CC) $(LDFLAGS) $(ODECMG) -o $@ $(LDLIBS)
 
 # Cleanup
  .PHONY: clean

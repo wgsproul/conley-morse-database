@@ -14,14 +14,13 @@
 #include "boost/serialization/vector.hpp"
 #include "boost/foreach.hpp"
 
-#include "chomp/Real.h"
-
 namespace chomp {
 
 /*********
  * Rect *
  *********/
 
+typedef double Real;
 
 class Rect {
 public:
@@ -106,7 +105,7 @@ inline Rect operator + ( const Rect & lhs, const Rect & rhs ) {
   
 inline std::ostream & operator << ( std::ostream & output_stream, const Rect & print_me );
 
-  // We cast to float, assuming that == testing is for hashing
+  // We downcast to float, assuming that == testing is for hashing
   inline bool operator==(Rect x, Rect y) {
     for ( size_t d = 0; d < x . dimension (); ++ d ) {
       if ( (float) x . lower_bounds [ d ] != (float) y . lower_bounds [ d ] ) return false;

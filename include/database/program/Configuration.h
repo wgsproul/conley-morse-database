@@ -23,10 +23,11 @@
 #include "ModelMap.h"
 typedef ModelMap GeometricMap;
 
-#include "database/structures/RectGeo.h"
+#include "chomp/Rect.h"
 
 class Configuration {
 public:
+  typedef chomp::Rect Rect;
   // Model, name and description
   std::string MODEL_NAME;
   std::string MODEL_DESC;
@@ -34,7 +35,7 @@ public:
   /* Parameter Space */
   int PARAM_DIM;
   int PARAM_SUBDIV_DEPTH;
-  RectGeo PARAM_BOUNDS;
+  Rect PARAM_BOUNDS;
   std::vector<bool> PARAM_PERIODIC;
 
   /* Phase Space */
@@ -43,7 +44,7 @@ public:
   int PHASE_SUBDIV_MIN;
   int PHASE_SUBDIV_MAX;
   int PHASE_SUBDIV_LIMIT;
-  RectGeo PHASE_BOUNDS; 
+  Rect PHASE_BOUNDS; 
   std::vector<bool> PHASE_PERIODIC;
   
   // Loading

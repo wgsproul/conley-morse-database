@@ -3,25 +3,20 @@
 #ifndef CMDP_LESLIEMAPP2_H
 #define CMDP_LESLIEMAPP2_H
 
-
-#undef MIN
-#undef MAX
 #include "capd/capdlib.h"
 #include "capd/dynsys/DynSysMap.h"
-#include "capd/intervals/lib.h"
+#include "capd/dynset/C0PpedSet.hpp"
 
 //#include <boost/numeric/interval.hpp>
-#include "database/structures/RectGeo.h"
-#include "database/structures/PrismGeo.h"
+#include "chomp/Rect.h"
 //#include "database/numerics/simple_interval.h"
+#include "capd/intervals/lib.h"
 
 
 #include <vector>
 
 struct ModelMap {
-  typedef RectGeo Rect;
-  typedef PrismGeo Prism; 
-
+  typedef chomp::Rect Rect;
   capd::IMap f;
   capd::dynsys::DynSysMap<capd::IMap> * map;
   int D;
@@ -38,7 +33,7 @@ struct ModelMap {
   
   
   
-  Rect intervalMethod ( const Rect & rectangle ) const {
+  chomp::Rect intervalMethod ( const chomp::Rect & rectangle ) const {
     using namespace capd;
     
     // Put input into IVector structure "x0"
@@ -49,7 +44,7 @@ struct ModelMap {
     }
     // INTERVAL METHOD CALCULATION
     IVector imethod = f ( box );
-    Rect result ( D );
+    chomp::Rect result ( D );
     for ( int d = 0; d < D; ++ d ) {
       result . lower_bounds [ d ] = imethod [ d ] . leftBound ();
       result . upper_bounds [ d ] = imethod [ d ] . rightBound ();
@@ -57,7 +52,7 @@ struct ModelMap {
     return result;
   }
   
-  Prism ppedMethod ( const Rect & rectangle ) const {
+  chomp::Prism ppedMethod ( const chomp::Rect & rectangle ) const {
     using namespace capd;
     
     // Put input into IVector structure "x0"
@@ -66,9 +61,7 @@ struct ModelMap {
       box [ d ] = interval ( rectangle . lower_bounds [ d ],
                             rectangle . upper_bounds [ d ] );
     }
-    //capd::C0PpedSet<IMatrix> rect ( box );
-    capd::C0PpedSet rect ( box );
-
+    capd::dynset::C0PpedSet<IMatrix> rect ( box );
     /* Perform map computation */
     Prism P ( D );
     try {
@@ -99,10 +92,10 @@ struct ModelMap {
     return P;
   }
   
-  std::vector < Rect > presubdivision ( const Rect & rectangle ) const {
+  std::vector < chomp::Rect > presubdivision ( const chomp::Rect & rectangle ) const {
     using namespace capd;
     
-    std::vector < Rect > result;
+    std::vector < chomp::Rect > result;
     // Put input into IVector structure "x0"
     IVector x0 ( D );
     for ( int d = 0; d < D; ++ d ) {
@@ -167,7 +160,7 @@ struct ModelMap {
     workstack . push_back ( box2 );
     
     BOOST_FOREACH ( const IVector & iv, workstack ) {
-      Rect item ( D );
+      chomp::Rect item ( D );
       for ( int d = 0; d < D; ++ d ) {
         item . lower_bounds [ d ] = iv [ d ] . leftBound ();
         item . upper_bounds [ d ] = iv [ d ] . rightBound ();
@@ -178,14 +171,13 @@ struct ModelMap {
   }
   
   // OPERATOR () FUNCTION
-  std::pair < Rect, Prism > operator () ( const boost::shared_ptr<Geo> & geo ) const {   
-    return operator () ( * boost::dynamic_pointer_cast<RectGeo> ( geo ) );
-  }
-  std::pair < Rect, Prism > operator () ( const Rect & rectangle ) const {
+  std::pair < chomp::Rect, chomp::Prism > operator ()
+  ( const chomp::Rect & rectangle ) const {
     return std::make_pair ( intervalMethod ( rectangle ), ppedMethod ( rectangle ) );
   }
 
-  //Prism operator () ( const Rect & rectangle ) const {
+  //chomp::Prism  operator ()
+  //( const chomp::Rect & rectangle ) const {
   //  return ppedMethod ( rectangle );
   //}
   

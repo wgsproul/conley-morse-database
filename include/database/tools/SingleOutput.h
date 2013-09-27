@@ -21,12 +21,11 @@
 
 inline std::string returnConleyIndex ( const chomp::ConleyIndex_t & ci );
 
-inline void DrawMorseSets ( const TreeGrid & phase_space, const MorseGraph & conley_morse_graph ) {
+inline void DrawMorseSets ( const Grid & phase_space, const MorseGraph & conley_morse_graph ) {
   // Create a Picture
   int Width =  4096;
   int Height = 4096;
   
-  std::cout << "DrawMorseSets.\n";
   Picture * picture = draw_morse_sets( Width, Height, phase_space, conley_morse_graph );
   Picture * picture2 = draw_grid ( Width, Height, phase_space );
   Picture * picture3 = draw_grid_and_morse_sets( Width, Height, phase_space, conley_morse_graph );
@@ -95,9 +94,7 @@ inline void CreateDotFile ( const MorseGraph & cmg ) {
     vertex_to_index [ *start ] = i;
     //outfile << i << " [label=\""<< cmg . grid (*start) -> size () << "\"]\n";
     // Label the Morse Graph set with their Conley index
-    outfile << i;
-    if ( cmg . conleyIndex ( *start ) ) outfile << " [label=\""<< conleyStringForZoo(conleyIndexString ( * cmg . conleyIndex ( *start ) )) << "\"]";
-    outfile << "\n";
+    outfile << i << " [label=\""<< conleyStringForZoo(conleyIndexString ( * cmg . conleyIndex ( *start ) )) << "\"]\n";
     ++ i;
   }
   int N = cmg . NumVertices ();

@@ -6,9 +6,9 @@
 #include "CImg.h"
 using namespace cimg_library;
 
-#include "database/numerics/Real.h"
 /// Draw to RGBA bitmap
 struct Picture {
+  typedef double Real; // TODO, worry about this
   CImg<unsigned char> bitmap;
   int Width;
   int Height;
@@ -145,11 +145,11 @@ inline void copy_scaled_picture ( Picture * picture, const Picture & A ) {
    << picture -> y_min << ", " << picture -> y_max << "]\n ";
    */
   for ( int i = 0; i < A . Width; ++ i ) {
-    Real x_left = A . x_min + (A . x_max - A . x_min ) * ( (Real) i / (Real) A . Width );
-    Real x_right = A . x_min + (A . x_max - A . x_min ) * ( (Real) (i+1) / (Real) A . Width );
+    Picture::Real x_left = A . x_min + (A . x_max - A . x_min ) * ( (Picture::Real) i / (Picture::Real) A . Width );
+    Picture::Real x_right = A . x_min + (A . x_max - A . x_min ) * ( (Picture::Real) (i+1) / (Picture::Real) A . Width );
     for ( int j = 0; j < A . Height; ++ j ) {
-      Real y_left = A . y_min + (A . y_max - A . y_min ) * ( (Real) j / (Real) A . Height );
-      Real y_right = A . y_min + (A . y_max - A . y_min ) * ( (Real) (j+1) / (Real) A . Height );
+      Picture::Real y_left = A . y_min + (A . y_max - A . y_min ) * ( (Picture::Real) j / (Picture::Real) A . Height );
+      Picture::Real y_right = A . y_min + (A . y_max - A . y_min ) * ( (Picture::Real) (j+1) / (Picture::Real) A . Height );
       //int offset = 4 * ( A . Width * ( A . Height - j - 1) + i );
       unsigned char Red = A . bitmap ( i, j, 0, 0 ); //bitmap [ offset + 0 ];
       unsigned char Green = A . bitmap ( i, j, 0, 1 ); //bitmap [ offset + 1 ];

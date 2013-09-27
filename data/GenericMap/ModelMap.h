@@ -10,30 +10,26 @@ For illustration, we implement the Leslie Map.
 #ifndef MODELMAP_H
 #define MODELMAP_H
 
-#include "database/structures/RectGeo.h"
+#include "chomp/Rect.h"
 #include <vector>
 
+#ifdef USE_BOOST_INTERVAL
+#include "database/numerics/boost_interval.h"
+#endif
 
-#include "database/numerics/simple_interval.h"
-
-//#ifdef USE_BOOST_INTERVAL
-//#include "database/numerics/boost_interval.h"
-//#endif
-
-//#ifdef USE_CAPD
-//#undef None
-//#include "capd/capdlib.h"
-//using namespace capd;
-//#endif
+#ifdef USE_CAPD
+#undef None
+#include "capd/capdlib.h"
+using namespace capd;
+#endif
 
 
 struct ModelMap {
-  typedef RectGeo Rect;
-//#ifdef USE_CAPD
-//typedef capd::intervals::Interval<double> interval;
-//#endif  
-  typedef simple_interval<double> interval;
-
+  typedef chomp::Rect Rect;
+#ifdef USE_CAPD
+typedef capd::intervals::Interval<double> interval;
+#endif  
+  
   std::vector < interval > parameter;
 
   // constructor
@@ -42,10 +38,6 @@ struct ModelMap {
     for ( unsigned int i=0; i<rectangle.dimension(); ++i ) 
       parameter [ i ] = interval (rectangle . lower_bounds [ i ], rectangle . upper_bounds [ i ]);
     return;
-  }
-
-  RectGeo operator () ( const boost::shared_ptr<Geo> & geo ) const {   
-    return operator () ( * boost::dynamic_pointer_cast<RectGeo> ( geo ) );
   }
 
   Rect operator () 
@@ -73,19 +65,19 @@ struct ModelMap {
     /*********************************************************************  
     *********************************************************************/
 
-//#ifdef USE_BOOST_INTERVAL
+#ifdef USE_BOOST_INTERVAL
     for ( unsigned int i=0; i<rectangle.dimension(); ++i ) {
       return_value . lower_bounds [ i ] = y [ i ] . lower ( );
       return_value . upper_bounds [ i ] = y [ i ] . upper ( );
     }
-//#endif
+#endif
 
-//#ifdef USE_CAPD
-//    for ( unsigned int i=0; i<rectangle.dimension(); ++i ) {
-//      return_value . lower_bounds [ i ] = y [ i ] . leftBound ( );
-//      return_value . upper_bounds [ i ] = y [ i ] . rightBound ( );
-//    }
-//#endif
+#ifdef USE_CAPD
+    for ( unsigned int i=0; i<rectangle.dimension(); ++i ) {
+      return_value . lower_bounds [ i ] = y [ i ] . leftBound ( );
+      return_value . upper_bounds [ i ] = y [ i ] . rightBound ( );
+    }
+#endif
 
     return return_value;
   } 

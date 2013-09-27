@@ -5,7 +5,6 @@
 #ifndef CHOMP_PRISM_H
 #define CHOMP_PRISM_H
 
-//#warning prism included
 #define BOOST_UBLAS_NDEBUG
 
 #include <iostream>
@@ -32,8 +31,6 @@ namespace ublas = boost::numeric::ublas;
 #include <boost/numeric/ublas/lu.hpp>
 #include <boost/numeric/ublas/io.hpp>
 namespace ublas = boost::numeric::ublas;
-
-#include "chomp/Real.h"
 
 namespace chomp {
 
@@ -62,6 +59,7 @@ bool InvertMatrix (const ublas::matrix<T>& input, ublas::matrix<T>& inverse) {
  * Prism *
  *********/
 
+typedef double Real;
 typedef ublas::matrix<Real, ublas::row_major> uMatrix;
 typedef ublas::vector<Real> uVector;
 
