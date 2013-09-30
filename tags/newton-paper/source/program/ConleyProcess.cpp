@@ -196,7 +196,7 @@ void ConleyProcess::accept (const Message &result) {
   result >> job_result;
 
   // Check if job_result is valid
-  if ( job_result . empty () ) {
+  if ( job_result . conley_index . empty () ) {
         std::cout << "ConleyProcess::accept: Received unacceptable result " 
               << job_number;// << "\n";
     if ( progress_detail . count ( incc ) ) {
