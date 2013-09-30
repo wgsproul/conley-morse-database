@@ -129,7 +129,7 @@ void ConleyProcess::initialize ( void ) {
     progress_detail . insert ( incc );
   }
   num_jobs_ = progress_detail . size ();
-  last_sent_job = 0;
+  last_job_sent = 0;
 }
 
 /* * * * * * * * * * */
@@ -146,7 +146,7 @@ int ConleyProcess::prepare ( Message & job ) {
 
   size_t job_number = num_jobs_sent_;
 
-  std::set<int64_t>::iterator it = progress_detail . lower_bound ( last_sent_job );
+  std::set<uint64_t>::iterator it = progress_detail . lower_bound ( last_job_sent );
   ++ it;
   if ( it == progress_detail . end () ) it = progress_detail . begin ();
   uint64_t incc = * it;
