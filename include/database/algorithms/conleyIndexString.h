@@ -73,6 +73,8 @@ std::vector<std::string> conleyIndexString ( const chomp::ConleyIndex_t & ci, in
       t.join();
     }
     if ( not computed ) {
+      #warning conleyIndexString throwing out results if one level fails
+      return std::vector<std::string> ();
       result . push_back ( std::string ( "Problem computing SNF.\n") );
       continue;
     }
