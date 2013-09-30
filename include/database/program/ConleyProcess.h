@@ -21,7 +21,6 @@ public:
 private:
   size_t num_jobs_;
   size_t num_jobs_sent_;
-  size_t max_jobs_;
 
   Configuration config;
   Database database;
