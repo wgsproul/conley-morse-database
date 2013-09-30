@@ -41,7 +41,7 @@ public:
   }
 };
 
-std::vector<std::string> conleyIndexString ( const chomp::ConleyIndex_t & ci, int time_out = 180 ) {
+std::vector<std::string> conleyIndexString ( const chomp::ConleyIndex_t & ci, int time_out = 1800 ) {
   using namespace chomp;
   std::cout << "conley index string\n";
   std::vector<std::string> result;

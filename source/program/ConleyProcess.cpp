@@ -197,7 +197,7 @@ void ConleyProcess::accept (const Message &result) {
   // Check if job_result is valid
   if ( job_result . conley_index . empty () ) {
         std::cout << "ConleyProcess::accept: Received unacceptable result " 
-              << job_number;// << "\n";
+              << incc << "(job number " << job_number << ") ";// << "\n";
     if ( progress_detail . count ( incc ) ) {
       ++ attempts [ incc ];
       std::cout << "Attempt #" << attempts [ incc ];
@@ -212,7 +212,7 @@ void ConleyProcess::accept (const Message &result) {
   } else {
     database . insert ( incc, job_result );
     std::cout << "ConleyProcess::accept: Received result " 
-              << job_number << "\n";
+               << incc << "(job number " << job_number << ")\n";
     if ( progress_detail . count (incc ) ) ++ progress_bar;
     progress_detail . erase ( incc );
   }
