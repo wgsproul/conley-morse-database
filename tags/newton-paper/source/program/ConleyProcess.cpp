@@ -142,7 +142,6 @@ int ConleyProcess::prepare ( Message & job ) {
   std::cout << " num_jobs_sent_ = " << num_jobs_sent_ << "\n";
   std::cout << " num_jobs_ = " << num_jobs_ << "\n";
   if ( progress_detail . size () == 0 ) return 1;
-  if ( num_jobs_sent_ == max_jobs_) return 1; // Code 1: No more jobs.
 
   size_t job_number = num_jobs_sent_;
 
