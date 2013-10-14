@@ -128,7 +128,8 @@ ConleyIndex ( ConleyIndex_t * output,
   start = clock ();
   
   std::cout << "ConleyIndex: calling RelativeMapHomology.\n";
-  int error_code = RelativeMapHomology ( &(output -> data ()), grid, X, A, grid, X, A, F, depth );
+  int error_code = RelativeMapHomology ( &(output -> data ()), grid, X, A, 
+                                         grid, X, A, F, depth );
   if ( error_code == 1 ) {
     std::cout << "Problem computing conley index. Returning undefined result.\n";
     output -> undefined () = true;
