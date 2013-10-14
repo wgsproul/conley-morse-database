@@ -1,0 +1,30 @@
+<config>
+<model>
+  <name>Newton Model </name>
+  <desc> Exploring the limit of iterates in newton convergence. </desc>
+</model>
+<param>
+  <dim> 2 </dim>
+  <bounds>
+    <lower> -0.1504 1.984 </lower>
+    <upper> -0.09766 2.0739 </upper>
+  </bounds>
+  <subdiv>
+    <depth> 11 </depth>
+  </subdiv>
+</param>
+<phase>
+  <dim> 1 </dim>
+  <bounds>
+    <lower> -3.14159265358979323846264338327950288 </lower>
+    <upper> 3.14159265358979323846264338327950288 </upper>
+  </bounds>
+  <subdiv>
+    <init> 13 </init>
+    <min> 14 </min>
+    <max> 19 </max>
+    <limit> 100 </limit>
+  </subdiv>
+  <periodic> 1 </periodic>
+</phase>
+</config>
