@@ -154,11 +154,7 @@ int ConleyProcess::prepare ( Message & job ) {
   uint64_t pb_id = incc_data_pair. first;
   uint64_t ms = incc_data_pair . second;
   Rect GD = database . parameter_space () . geometry ( pb_id );
-  double tol = 1e-8;
-  for ( int d = 0; d < parameter_grid -> dimension (); ++ d ) {
-    GD . lower_bounds [ d ] -= tol;
-    GD . upper_bounds [ d ] += tol;
-  }
+
   job << job_number;
   job << incc;
   job << GD;
