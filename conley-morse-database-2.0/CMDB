@@ -1,3 +1,0 @@
-make clean
-make MODELDIR=$1
-#qsub -v ENV_MODELDIR=$1 script.sh
